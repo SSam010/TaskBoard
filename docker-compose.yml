@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  server_taskboard:
+    build: .
+    image: my_taskboard:1.0
+    container_name: server_taskboard
+    command: python3 manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src/taskboard
