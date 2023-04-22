@@ -1,34 +1,57 @@
-Коротко о проекте:
+# Project Summary
 
-- Это мой любительский проект, который реализует функционал RESTful API для управления персональным списком задач.
+This project implements a RESTful API to manage a personal task list.
 
-Настройка и запуск:
+# Setup and Launch
 
-Приложение поддерживает развертку в docker. Поэтому для запуска приложения достаточно воспользоваться командой docker compose up.
-По умолчанию приложение доступно по адресу http://localhost:8000/
+The application supports deployment in Docker. To launch the application, use the command `docker compose up`. By default, the application is accessible at http://localhost:8000/.
 
-Управление и функционал:
+# Management and Functionality
 
-В приложение предварительно создан superuser. Параметры для входа: username: root, password: 1234
+A superuser is pre-created in the application. Login credentials are as follows: username: `root`, password: `1234`.
 
-Для создания новых пользователей необходимо воспользоваться встроенной админ-панелью 
-http://localhost:8000/admin/ , используя таблицу "Users".
+To create new users, use the built-in admin panel at http://localhost:8000/admin/ and navigate to the "Users" table.
 
-Для работы с данным сервисом через RESTful API необходимо быть авторизованным пользователем. Ниже приведены основные
-URL-адреса, их ограничения и функционал.
+To use this service via the RESTful API, you must be an authorized user.
 
-Для авторизации в приложении необходимо:
+# Authorization
 
-- либо пройти авторизацию через графический интерфейс по адресу http://127.0.0.1:8000/api/v1/auth/login/
+To log in to the application, you can either:
 
-- либо указывать данные для входа в теле запроса. Например, через ПО Postman во вкладке Authorization необходимо выбрать Basic Auth и
-указать свои данные для входа.
+Go through the authorization process via the graphical interface at http://127.0.0.1:8000/api/v1/auth/login/
+Provide login information in the request body. For example, via Postman, select Basic Auth in the Authorization tab and provide your login information.
 
-Доступные url адреса, тип запроса, разрешения(permissions):
+# API Endpoints
 
-- http://localhost:8000/api/v1/ ,  GET, все авторизованные юзеры; - позволяет получить все записи(задачи);
-- http://localhost:8000/api/v1/<id>/ , GET, все авторизованные юзеры; - позволяет получить одну запись по её id;
-- http://localhost:8000/api/v1/create/ ,  POST, все авторизованные юзеры; - позволяет создать новую задачу(обязательные параметры: titile, description, deadline),
-по умолчанию добавляется параметр is_done = False;
-- http://localhost:8000/api/v1/update/<id>/ ,  POST, администраторы или владелец; - позволяет редактировать запись по её id, например изменить параметр is_done = True;
-- http://localhost:8000/api/v1/delete/<id>/ ,  POST, администраторы или владелец; - позволяет удалить запись по её id.
+The following API endpoints are available:
+
+### Retrieve all tasks
+
+- URL: `/api/v1/`
+- Method: GET
+- Permissions: All authorized users
+- Description: Retrieve all task records.
+
+### Retrieve a single task
+
+- URL: `/api/v1/<id>/`
+- Method: GET
+- Permissions: All authorized users
+- Description: Retrieve a single task record by its ID.
+### Create a new task
+- URL: `/api/v1/create/`
+- Method: POST
+- Permissions: All authorized users
+- Required Parameters: `title`, `description`, `deadline`
+- Optional Parameters: `is_done` (default is `False`)
+- Description: Create a new task record.
+### Update an existing task
+- URL: `/api/v1/update/<id>/`
+- Method: POST
+- Permissions: Admins or task owner
+- Description: Update an existing task record by its ID.
+### Delete a task
+- URL: `/api/v1/delete/<id>/`
+- Method: POST
+- Permissions: Admins or task owner
+- Description: Delete a task record by its ID.
